@@ -68,11 +68,24 @@ export const Price = styled.Text`
   color: ${({ theme }) => theme.colors.main};
 `;
 
+export const Accesories = styled.View`
+  width: 100%;
+
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  margin-top: 16px; 
+
+  align-items: center;
+  justify-content: space-between;
+`;
+
 export const About = styled.Text`
   font-family: ${({ theme }) => theme.fonts.primary_400};
   font-size: ${RFValue(15)}px;
   color: ${({ theme }) => theme.colors.text};
-  text-align: justify;
+
+  line-height: ${RFValue(25)}px;
 
   margin-top: 23px;
 `;
