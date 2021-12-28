@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 import { RFValue } from "react-native-responsive-fontsize";
-import { getStatusBarHeight } from "react-native-iphone-x-helper";
+import { getBottomSpace, getStatusBarHeight } from "react-native-iphone-x-helper";
 
 export const Container = styled.View`
   flex: 1;
@@ -33,7 +33,7 @@ export const Details = styled.View`
   align-items: center;
   justify-content: space-between;
 
-  margin-top: 38px;
+  margin-top: 35px;
 `;
 
 export const Description = styled.View``;
@@ -88,4 +88,11 @@ export const About = styled.Text`
   line-height: ${RFValue(25)}px;
 
   margin-top: 23px;
+`;
+
+export const Footer = styled.View`
+  width: 100%;
+  padding: 24px 24px ${getBottomSpace() + 24}px;
+
+  background-color: ${({ theme }) => theme.colors.background_secondary};
 `;

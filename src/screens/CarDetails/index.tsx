@@ -1,8 +1,9 @@
 import React from "react";
 
+import { Button } from "../../components/Button";
+import { Accessory } from "../../components/Accessory";
 import { BackButton } from "../../components/BackButton";
 import { ImageSlider } from "../../components/ImageSlider";
-import { Accessory } from "../../components/Accessory";
 
 import SpeedSvg from '../../assets/svg/speed.svg';
 import ForceSvg from '../../assets/svg/force.svg';
@@ -25,6 +26,7 @@ import {
   Price,
   Accesories,
   About,
+  Footer
 } from "./styles";
 
 export function CarDetails() {
@@ -70,6 +72,13 @@ export function CarDetails() {
           para quem gosta de acelerar.
         </About>
       </Content>
+
+      <Footer>
+        <Button 
+          title="Escolher período do aluguel"
+          onPress={() => {}}
+        />
+      </Footer>
     </Container>
   );
 }
