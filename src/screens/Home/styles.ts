@@ -1,7 +1,6 @@
 import styled from 'styled-components/native';
 import { FlatList } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
-import { flattenDiagnosticMessageText } from 'typescript';
 
 export const Container = styled.View`
   flex: 1;

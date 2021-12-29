@@ -1,5 +1,6 @@
 import React from "react";
 import { useTheme } from "styled-components";
+import { useNavigation } from "@react-navigation/native";
 
 import { Button } from "../../components/Button";
 import { Accessory } from "../../components/Accessory";
@@ -44,11 +45,16 @@ import {
 export function ShedulingDetails() {
 
   const { colors } = useTheme();
+  const { navigate, goBack } = useNavigation();
+
+  function handleShedulingComplete() {
+    navigate('ShedulingComplete');
+  }
 
   return (
     <Container>
       <Header>
-        <BackButton onPress={() => {}} />
+        <BackButton onPress={() => goBack()} />
       </Header>
 
       <CarImages>
@@ -110,7 +116,7 @@ export function ShedulingDetails() {
         <Button 
           title="Alugar agora"
           color={colors.success}
-          onPress={() => {}}
+          onPress={handleShedulingComplete}
         />
       </Footer>
     </Container>

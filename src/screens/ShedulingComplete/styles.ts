@@ -1,5 +1,4 @@
 import styled from 'styled-components/native';
-import { RectButton } from 'react-native-gesture-handler';
 import { RFValue } from 'react-native-responsive-fontsize';
 
 export const Container = styled.View`
@@ -24,7 +23,6 @@ export const Title = styled.Text`
   margin-top: 40px;
 `;
 
-
 export const Message = styled.Text`
   font-family: ${({ theme }) => theme.fonts.primary_400};
   font-size: ${RFValue(15)}px;
@@ -42,7 +40,7 @@ export const Footer = styled.View`
   margin: 50px 0;
 `;
 
-export const ButtonContainer = styled(RectButton)`
+export const ButtonContainer = styled.TouchableOpacity`
   width: 80px;
   height: 56px;
 

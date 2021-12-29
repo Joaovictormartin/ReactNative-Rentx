@@ -2,6 +2,7 @@ import React from "react";
 import { StatusBar } from "react-native";
 import { useTheme } from "styled-components";
 import { useWindowDimensions } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import LogoSvg from '../../assets/svg/logo_background_gray.svg';
 import DoneSvg from '../../assets/svg/done.svg';
@@ -19,6 +20,11 @@ import {
 export function ShedulingComplete() {
   const { colors } = useTheme();
   const { width } = useWindowDimensions();
+  const { navigate, goBack } = useNavigation();
+
+  function handleHome() {
+    navigate('Home');
+  }
 
   return (
     <Container>
@@ -43,7 +49,10 @@ export function ShedulingComplete() {
       </Content>
 
       <Footer>
-        <ButtonContainer>
+        <ButtonContainer 
+          activeOpacity={0.6}
+          onPress={handleHome}
+        >
           <ButtonTitle>OK</ButtonTitle>
         </ButtonContainer>
       </Footer>

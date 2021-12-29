@@ -1,7 +1,7 @@
 import React from "react";
 import { StatusBar } from "react-native";
 import { useTheme } from "styled-components";
-import { RFValue } from "react-native-responsive-fontsize";
+import { useNavigation } from "@react-navigation/native";
 
 import { BackButton } from '../../components/BackButton';
 import { Calendar } from "../../components/Calendar";
@@ -23,6 +23,11 @@ import {
 
 export function Sheduling() {
   const { colors } = useTheme();
+  const { navigate, goBack } = useNavigation();
+
+  function handleShedulingDetails() {
+    navigate('ShedulingDetails');
+  }
 
   return (
     <Container>
@@ -35,7 +40,7 @@ export function Sheduling() {
       <Header>
         <BackButton 
           color={colors.shape}
-          onPress={ () => {}}
+          onPress={() => goBack()}
         />
 
         <Title>
@@ -64,7 +69,10 @@ export function Sheduling() {
       </Content>
 
       <Footter>
-        <Button title="Confirmar" />
+        <Button 
+          title="Confirmar"
+          onPress={handleShedulingDetails}
+        />
       </Footter>
 
     </Container>
