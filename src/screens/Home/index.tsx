@@ -1,42 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { StatusBar } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { useNavigation } from "@react-navigation/native";
 
 import Logo from "../../assets/svg/logo.svg";
 
+import { api } from "../../services/api";
 import { Car } from "../../components/Car";
+import { Cars } from "../../../interfaces/Cars";
 
-import { 
-  Container, 
-  Header, 
-  HeaderContent, 
-  TotalCars, 
-  CarList 
-} from "./styles";
+import { Container, Header, HeaderContent, TotalCars, CarList } from "./styles";
 
 export function Home() {
-
   const { navigate } = useNavigation();
 
-  function handleCarDetails() {
-    navigate('CarDetails');
-  }
+  const [cars, setCars] = useState<Cars[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  function renderItem(data:any) {
-    return <Car data={carData} onPress={handleCarDetails}/>
-  }
+  useEffect(() => {
+    async function getCars() {
+      try {
+        await api.get("/cars").then((resp) => setCars(resp.data));
+      } catch (error) {
+        setCars([])
+      } finally {
+        setLoading(false);
+      }
+    }
 
-  const carData = {
-    brand: "Audi",
-    name: "RS 5 Coupé",
-    rent: {
-      period: "Ao dia",
-      price: 120,
-    },
-    thumbnail:
-      "https://img2.gratispng.com/20180628/stg/kisspng-2018-audi-s5-3-0t-premium-plus-coupe-audi-rs5-2017-2018-audi-a5-coupe-5b35130451d959.0738564215302049323353.jpg",
-  };
+    getCars();
+  }, []);
+
+  function handleCarDetails(data: any) {
+    navigate("CarDetails", { data: data });
+  }
 
   return (
     <Container>
@@ -49,16 +46,17 @@ export function Home() {
       <Header>
         <HeaderContent>
           <Logo width={RFValue(108)} height={RFValue(12)} />
-          <TotalCars>Total de 12 carros</TotalCars>
+          <TotalCars>Total de {`${cars.length}`} carros</TotalCars>
         </HeaderContent>
       </Header>
 
       <CarList
-        data={[1,2,3,4,5,6,7]}
-        keyExtractor={item => String(item)}
-        renderItem={(item) => renderItem(item)}
+        data={cars}
+        keyExtractor={(item: any) => item.id}
+        renderItem={({ item }) => (
+          <Car data={item} onPress={() => handleCarDetails(item)} />
+        )}
       />
-
     </Container>
   );
 }
