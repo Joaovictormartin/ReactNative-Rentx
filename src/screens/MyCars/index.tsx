@@ -17,6 +17,7 @@ import {
   Title,
   SubTitle,
   Content,
+  TextList,
   Appointments,
   AppointmentsTitle,
   AppointmentsValue,
@@ -82,25 +83,29 @@ export function MyCars() {
             <AppointmentsTitle>Agendamentos feitos</AppointmentsTitle>
             <AppointmentsValue>{cars.length}</AppointmentsValue>
           </Appointments>
-
-          <FlatList
-            data={cars}
-            keyExtractor={(item) => item.id}
-            showsHorizontalScrollIndicator={false}
-            renderItem={({ item }) => (
-              <CarsWrapper>
-                <Car data={item.car} />
-                <CarFooter>
-                  <CarFooterTitle>Período</CarFooterTitle>
-                  <CarFooterPeriod>
-                    <CarFooterDate>{item.startDate}</CarFooterDate>
-                    <ArrowRight name="arrowright"/>
-                    <CarFooterDate>{item.endDate}</CarFooterDate>
-                  </CarFooterPeriod>
-                </CarFooter>
-              </CarsWrapper>
-            )}
-          />
+        
+        {
+          cars.length > 0 ?(
+            <FlatList
+              data={cars}
+              keyExtractor={(item) => item.id}
+              showsHorizontalScrollIndicator={false}
+              renderItem={({ item }) => (
+                <CarsWrapper>
+                  <Car data={item.car} />
+                  <CarFooter>
+                    <CarFooterTitle>Período</CarFooterTitle>
+                    <CarFooterPeriod>
+                      <CarFooterDate>{item.startDate}</CarFooterDate>
+                      <ArrowRight name="arrowright"/>
+                      <CarFooterDate>{item.endDate}</CarFooterDate>
+                    </CarFooterPeriod>
+                  </CarFooter>
+                </CarsWrapper>
+              )}
+            />
+          ) : <TextList>Não há carros agendamentos</TextList>
+        }
         </Content>
       )}
     </Container>

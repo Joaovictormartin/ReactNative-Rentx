@@ -35,7 +35,13 @@ export const SubTitle = styled.Text`
 export const Content = styled.View`
   flex: 1;
   width: 100%;
-  padding: 0 16px;;
+  padding: 0 16px;
+`;
+
+export const TextList = styled.Text`
+  font-family: ${({ theme }) => theme.fonts.secondary_400};
+  font-size: ${RFValue(12)}px;
+  color: ${({ theme }) => theme.colors.text};
 `;
 
 export const Appointments = styled.View`
