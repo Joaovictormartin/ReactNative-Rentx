@@ -10,13 +10,34 @@ import { Car } from "../../components/Car";
 import { Load } from "../../components/Load";
 import { Cars } from "../../../interfaces/Cars";
 
-import { Container, Header, HeaderContent, TotalCars, CarList } from "./styles";
+import { 
+  Container,
+  Header, 
+  HeaderContent, 
+  TotalCars, 
+  CarList,
+  MyCarsButton,
+  ButtonIcon
+} from "./styles";
 
 export function Home() {
   const { navigate } = useNavigation();
 
   const [cars, setCars] = useState<Cars[]>([]);
   const [loading, setLoading] = useState(true);
+
+  
+  function handleCarDetails(car: any) {
+    navigate("CarDetails", { car });
+  }
+
+  function handleOpenMyCar() {
+    navigate("MyCars");
+  }
+  
+  function LoadList() {
+    return <Load/>
+  }
 
   useEffect(() => {
     async function getCars() {
@@ -28,18 +49,9 @@ export function Home() {
         setLoading(false);
       }
     }
-
     getCars();
   }, []);
-
-  function handleCarDetails(car: any) {
-    navigate("CarDetails", { car });
-  }
-
-  function LoadList() {
-    return <Load/>
-  }
-
+  
   return (
     <Container>
       <StatusBar
@@ -66,6 +78,13 @@ export function Home() {
           />
         )
       }
+
+      <MyCarsButton
+        activeOpacity={0.6}
+        onPress={() => handleOpenMyCar()}
+      >
+        <ButtonIcon name="ios-car-sport"/>
+      </MyCarsButton>
     </Container>
   );
 }
