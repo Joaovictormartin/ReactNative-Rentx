@@ -1,7 +1,7 @@
 import React from "react";
 import { TouchableOpacityProps } from "react-native";
 
-import GasolineSvg from "../../assets/svg/gasoline.svg";
+import { getAccessoryIcon } from "../../utils/getAccessoryIcon";
 import { Cars } from '../../../interfaces/Cars';
 
 import {
@@ -18,10 +18,12 @@ import {
 } from "./styles";
 
 interface Props extends TouchableOpacityProps {
-  data: any;
+  data: Cars;
 }
 
 export function Car({ data, ...rest } : Props) {
+  const MotIcon = getAccessoryIcon(data.fuel_type);
+
   return (
     <Container activeOpacity={0.6} {...rest}>
       <Details>
@@ -35,7 +37,7 @@ export function Car({ data, ...rest } : Props) {
           </Rent>
 
           <Type>
-            <GasolineSvg />
+            <MotIcon/>
           </Type>
         </About>
       </Details>
