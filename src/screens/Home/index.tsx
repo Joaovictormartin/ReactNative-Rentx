@@ -7,6 +7,7 @@ import Logo from "../../assets/svg/logo.svg";
 
 import { api } from "../../services/api";
 import { Car } from "../../components/Car";
+import { Load } from "../../components/Load";
 import { Cars } from "../../../interfaces/Cars";
 
 import { Container, Header, HeaderContent, TotalCars, CarList } from "./styles";
@@ -31,8 +32,12 @@ export function Home() {
     getCars();
   }, []);
 
-  function handleCarDetails(data: any) {
-    navigate("CarDetails", { data: data });
+  function handleCarDetails(car: any) {
+    navigate("CarDetails", { car });
+  }
+
+  function LoadList() {
+    return <Load/>
   }
 
   return (
@@ -50,13 +55,17 @@ export function Home() {
         </HeaderContent>
       </Header>
 
-      <CarList
-        data={cars}
-        keyExtractor={(item: any) => item.id}
-        renderItem={({ item }) => (
-          <Car data={item} onPress={() => handleCarDetails(item)} />
-        )}
-      />
+      {
+        loading ? LoadList() : (
+          <CarList
+            data={cars}
+            keyExtractor={(item: any) => item.id}
+            renderItem={({ item }) => (
+              <Car data={item} onPress={() => handleCarDetails(item)} />
+            )}
+          />
+        )
+      }
     </Container>
   );
 }
