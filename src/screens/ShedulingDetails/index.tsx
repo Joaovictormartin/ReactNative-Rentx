@@ -55,6 +55,7 @@ interface RentalPeriodo {
 export function ShedulingDetails() {
 
   const [ rentalPeriod, setRentalPeriod ] = useState<RentalPeriodo>({} as RentalPeriodo);
+  const [ loading, setLoading ] = useState(false);
 
   const route = useRoute();
   const { colors } = useTheme();
@@ -64,6 +65,8 @@ export function ShedulingDetails() {
   const rentalTotal = Number(dates.length) * car.rent.price;
 
   async function handleShedulingComplete() {
+    setLoading(true);
+
     const shedulingByCar = await api.get(`/schedules_bycars/${car.id}`); 
 
     const unavailable_dates = [
@@ -82,8 +85,9 @@ export function ShedulingDetails() {
       id: car.id,
       unavailable_dates
     })
-    .then((resp) => navigate('ShedulingComplete'))
-    .catch(() => Alert.alert("Aviso", "Não foi possível confirmar o agendamento"));
+    .then(() => navigate('ShedulingComplete'))
+    .catch(() => Alert.alert("Aviso", "Não foi possível confirmar o agendamento"))
+    .finally(() => setLoading(false));
   }
 
   useEffect(()=>{
@@ -160,6 +164,7 @@ export function ShedulingDetails() {
           title="Alugar agora"
           color={colors.success}
           onPress={handleShedulingComplete}
+          loading={loading}
         />
       </Footer>
     </Container>
