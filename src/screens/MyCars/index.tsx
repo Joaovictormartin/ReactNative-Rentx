@@ -98,16 +98,16 @@ export function MyCars() {
             <AppointmentsValue>{cars.length}</AppointmentsValue>
           </Appointments>
         
-        {
-          cars.length > 0 ?(
-            <FlatList
-              data={cars}
-              keyExtractor={(item) => item.id}
-              showsHorizontalScrollIndicator={false}
-              renderItem={renderItem}
-            />
-          ) : <TextList>Não há carros agendamentos</TextList>
-        }
+          {
+            cars.length > 0 ?(
+              <FlatList
+                data={cars}
+                keyExtractor={(item) => item.id}
+                showsHorizontalScrollIndicator={false}
+                renderItem={renderItem}
+              />
+            ) : <TextList>Não há carros agendamentos</TextList>
+          }
         </Content>
       )}
     </Container>
