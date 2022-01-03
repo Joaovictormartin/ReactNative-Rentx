@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { format } from 'date-fns';
-import { Alert, StatusBar } from "react-native";
+import { StatusBar } from "react-native";
 import { useTheme } from "styled-components";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
@@ -49,14 +49,10 @@ export function Sheduling() {
   const [ rentalPeriod, setRentalPeiod ] = useState<RentalPeriod>({} as RentalPeriod);
 
   function handleShedulingDetails() {
-    if(!rentalPeriod.startFormatted || !rentalPeriod.endFormatted) {
-      Alert.alert("Atenção", "Selecione o intervalo para alugar.")
-    } else {
-      navigate("ShedulingDetails", {
-        car,
-        dates: Object.keys(markedDates)
-      });
-    }
+    navigate("ShedulingDetails", {
+      car,
+      dates: Object.keys(markedDates)
+    })
   }
 
   function handleChangeDate(date: DayProps) {
@@ -123,7 +119,16 @@ export function Sheduling() {
       </Content>
 
       <Footter>
-        <Button title="Confirmar" onPress={handleShedulingDetails} />
+        <Button 
+          title="Confirmar" 
+          onPress={handleShedulingDetails} 
+          disabledOpacity={
+            !!rentalPeriod.endFormatted === false 
+              ? true 
+              : false
+          }
+          
+        />
       </Footter>
     </Container>
   );
