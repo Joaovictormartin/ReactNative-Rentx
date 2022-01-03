@@ -8,7 +8,7 @@ import { api } from "../../services/api";
 import { Cars } from "../../../interfaces/Cars";
 
 import { Car } from "../../components/Car";
-import { Load } from "../../components/Load";
+import { Lottie } from "../../components/Lottie";
 import { BackButton } from "../../components/BackButton";
 
 import {
@@ -91,7 +91,7 @@ export function MyCars() {
         <SubTitle>Conforto, segurança e praticidade.</SubTitle>
       </Header>
 
-      {loading ? <Load /> : (
+      {loading ? <Lottie /> : (
         <Content>
           <Appointments>
             <AppointmentsTitle>Agendamentos feitos</AppointmentsTitle>

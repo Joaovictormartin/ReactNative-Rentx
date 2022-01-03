@@ -6,9 +6,10 @@ import { useNavigation } from "@react-navigation/native";
 import Logo from "../../assets/svg/logo.svg";
 
 import { api } from "../../services/api";
-import { Car } from "../../components/Car";
-import { Load } from "../../components/Load";
 import { Cars } from "../../../interfaces/Cars";
+
+import { Car } from "../../components/Car";
+import { Lottie } from "../../components/Lottie";
 
 import { 
   Container,
@@ -36,7 +37,7 @@ export function Home() {
   }
   
   function LoadList() {
-    return <Load/>
+    return <Lottie/>
   }
 
   useEffect(() => {
