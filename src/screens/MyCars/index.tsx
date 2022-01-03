@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
-import { StatusBar, FlatList } from "react-native";
 import { useTheme } from "styled-components";
+import { StatusBar, FlatList } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { api } from "../../services/api";
@@ -38,11 +38,11 @@ interface CarProps {
 }
 
 export function MyCars() {
-  const [cars, setCars] = useState<CarProps[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [ cars, setCars ] = useState<CarProps[]>([]);
+  const [ loading, setLoading ] = useState(true);
 
   const { colors } = useTheme();
-  const { navigate, goBack } = useNavigation();
+  const { goBack } = useNavigation();
 
   useEffect(() => {
     async function getCars() {
@@ -61,6 +61,22 @@ export function MyCars() {
     getCars();
   }, []);
 
+  function renderItem({ item }:any) {
+    return(
+      <CarsWrapper>
+        <Car data={item.car} />
+        <CarFooter>
+          <CarFooterTitle>Período</CarFooterTitle>
+          <CarFooterPeriod>
+            <CarFooterDate>{item.startDate}</CarFooterDate>
+            <ArrowRight name="arrowright"/>
+            <CarFooterDate>{item.endDate}</CarFooterDate>
+          </CarFooterPeriod>
+        </CarFooter>
+      </CarsWrapper>
+    )
+  }
+
   return (
     <Container>
       <StatusBar
@@ -75,9 +91,7 @@ export function MyCars() {
         <SubTitle>Conforto, segurança e praticidade.</SubTitle>
       </Header>
 
-      {loading ? (
-        <Load />
-      ) : (
+      {loading ? <Load /> : (
         <Content>
           <Appointments>
             <AppointmentsTitle>Agendamentos feitos</AppointmentsTitle>
@@ -90,19 +104,7 @@ export function MyCars() {
               data={cars}
               keyExtractor={(item) => item.id}
               showsHorizontalScrollIndicator={false}
-              renderItem={({ item }) => (
-                <CarsWrapper>
-                  <Car data={item.car} />
-                  <CarFooter>
-                    <CarFooterTitle>Período</CarFooterTitle>
-                    <CarFooterPeriod>
-                      <CarFooterDate>{item.startDate}</CarFooterDate>
-                      <ArrowRight name="arrowright"/>
-                      <CarFooterDate>{item.endDate}</CarFooterDate>
-                    </CarFooterPeriod>
-                  </CarFooter>
-                </CarsWrapper>
-              )}
+              renderItem={renderItem}
             />
           ) : <TextList>Não há carros agendamentos</TextList>
         }
