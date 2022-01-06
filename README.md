@@ -23,5 +23,5 @@ Detalhe, Escolher datas, Resumo, Agendamento confirmado e Meus carros.
 
 ## Layout
 <div align="center">
-<img src=""
+<img src="https://github.com/Joaovictormartin/Assets_Geral/blob/main/RN%20-%20RentX/Rentx.gif"
 </div>
