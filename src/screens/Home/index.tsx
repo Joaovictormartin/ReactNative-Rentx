@@ -95,9 +95,9 @@ export function Home() {
   }, []);
 
   //previnir q o usuario volte para tela anterior
-  useEffect(() => {
-    BackHandler.addEventListener("hardwareBackPress", () => true);
-  }, []);
+  // useEffect(() => {
+  //   BackHandler.addEventListener("hardwareBackPress", () => go);
+  // }, []);
 
   return (
     <Container>
