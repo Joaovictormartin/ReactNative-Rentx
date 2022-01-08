@@ -9,6 +9,7 @@ interface Props extends TouchableOpacityProps {
   color?: string;
   disabledOpacity?: boolean;
   loading?: boolean;
+  light?: boolean;
 }
 
 export function Button({
@@ -16,6 +17,7 @@ export function Button({
   color,
   disabledOpacity,
   loading = false,
+  light = false,
   ...rest
 }: Props) {
   const { colors } = useTheme();
@@ -31,7 +33,7 @@ export function Button({
       {
         loading 
           ? <ActivityIndicator color={colors.shape} size="small" />
-          : <Title>{title}</Title>
+          : <Title light={light}>{title}</Title>
       }
     </Container>
   );
