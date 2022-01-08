@@ -2,6 +2,7 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import { Home } from "../screens/Home";
+import { Signin } from "../screens/Signin";
 import { Splash } from "../screens/Splash";
 import { MyCars } from "../screens/MyCars";
 import { Sheduling } from "../screens/Sheduling";
@@ -11,6 +12,7 @@ import { ShedulingComplete } from "../screens/ShedulingComplete";
 
 type RootStackParamList = {
   Home: any;
+  Signin: any;
   MyCars: any;
   Splash: any;
   Sheduling: any;
@@ -23,7 +25,12 @@ const { Navigator, Screen } = createNativeStackNavigator<RootStackParamList>();
 
 export function StackRoutes() {
   return (
-    <Navigator initialRouteName="Splash">
+    <Navigator initialRouteName="Signin">
+      <Screen 
+        name="Signin" 
+        component={Signin} 
+        options={{ headerShown: false }} 
+      />
       <Screen 
         name="Home" 
         component={Home} 
