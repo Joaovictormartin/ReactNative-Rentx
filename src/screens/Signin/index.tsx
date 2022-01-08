@@ -5,6 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
+import { InputPassword } from "../../components/InputPassword";
 
 import {
   Container,
@@ -45,12 +46,9 @@ export function Signin() {
           autoCapitalize="none"
         />
 
-        <Input 
-          iconName="mail"
-          placeholder="Senha"
-          keyboardType="default"
-          autoCorrect={false}
-          autoCapitalize="none"
+        <InputPassword 
+          iconName="lock"
+          placeholder="Senha"          
         />
       </Form>
 
