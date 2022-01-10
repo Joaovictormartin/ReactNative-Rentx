@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import * as Yup from 'yup';
+import * as Yup from "yup";
 import { useTheme } from "styled-components";
 import { useNavigation } from "@react-navigation/native";
-import { 
+import {
   StatusBar,
   Keyboard,
   KeyboardAvoidingView,
@@ -20,37 +20,41 @@ export function Signin() {
   const { colors } = useTheme();
   const { navigate } = useNavigation();
 
-  const [ email, setEmail ] = useState('');
-  const [ password, setPassword ] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  function handleNewAccount(){
+    navigate("SignUpFirstStep")
+  }
 
   async function handleSignIn() {
-    try{
+    try {
       const shema = Yup.object().shape({
         email: Yup.string()
-          .required('E-mail obrigatório')
-          .email('Digite um e-mail válido'),
+          .required("E-mail obrigatório")
+          .email("Digite um e-mail válido"),
         password: Yup.string()
-          .required('A senha é obrigatória')
+          .required("A senha é obrigatória"),
       });
 
       await shema.validate({ email, password });
 
-      Alert.alert('Tudo certo')
-    }catch(error){
-      if(error instanceof Yup.ValidationError) {
-        Alert.alert('Opa', error.message)
+      Alert.alert("Tudo certo");
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        Alert.alert("Opa", error.message);
       } else {
         Alert.alert(
-          'Erro na autenticação', 
-          'Ocorreu um erro ao fazer login, verifique as credenciais'
-        )
+          "Erro na autenticação",
+          "Ocorreu um erro ao fazer login, verifique as credenciais"
+        );
       }
     }
   }
 
   return (
     <KeyboardAvoidingView behavior="position" enabled>
-      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>        
+      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <Container>
           <StatusBar
             barStyle="dark-content"
@@ -77,8 +81,8 @@ export function Signin() {
               onChangeText={setEmail}
             />
 
-            <InputPassword 
-              iconName="lock" 
+            <InputPassword
+              iconName="lock"
               placeholder="Senha"
               value={password}
               onChangeText={setPassword}
@@ -97,7 +101,7 @@ export function Signin() {
               light
               title="Criar conta gratuita"
               color={colors.background_secondary}
-              onPress={() => {}}
+              onPress={handleNewAccount}
               disabledOpacity={false}
               loading={false}
             />
