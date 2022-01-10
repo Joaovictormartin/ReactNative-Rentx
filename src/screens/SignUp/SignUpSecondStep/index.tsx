@@ -59,7 +59,12 @@ export function SignUpSecondStep() {
 
       await shema.validate({ password, passwordConfirm });
 
-      navigate("");
+      navigate('Confirmation', {
+        title: 'Conta Criada!', 
+        message: `Agora é só fazer login\ne aproveitar.`, 
+        nextScreenRoute: 'Signin'
+      });
+
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         Alert.alert("Opa", error.message);
