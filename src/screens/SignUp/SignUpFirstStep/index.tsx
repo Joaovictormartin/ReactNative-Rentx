@@ -32,7 +32,7 @@ export function SignUpFirstStep() {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [cnh, setCnh] = useState("");
+  const [driverLicense, setDriverLicense] = useState("");
 
   function handleBack() {
     goBack();
@@ -41,24 +41,24 @@ export function SignUpFirstStep() {
   async function handleSignIn() {
     try {
       const shema = Yup.object().shape({
-        name: Yup.string().required("O nome é obrigatório"),
+        driverLicense: Yup.string()
+          .required("A CNH é obrigatória"),
         email: Yup.string()
-          .required("O E-mail é obrigatório")
-          .email("Digite um e-mail válido"),
-        cnh: Yup.string().required("A CNH é obrigatória"),
+        .required("O E-mail é obrigatório")
+        .email("Digite um e-mail válido"),
+        name: Yup.string()
+          .required("O nome é obrigatório"),
       });
 
-      await shema.validate({ name, email, cnh });
+      const data = { name, email, driverLicense }
 
-      Alert.alert("Tudo certo");
+      await shema.validate(data);
+
+      navigate("SignUpSecondStep", { user: data});
+      
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
-        Alert.alert("Opa", error.message);
-      } else {
-        Alert.alert(
-          "Erro na autenticação",
-          "Ocorreu um erro ao fazer login, verifique as credenciais"
-        );
+        return Alert.alert("Opa", error.message);
       }
     }
   }
@@ -106,8 +106,8 @@ export function SignUpFirstStep() {
               iconName="credit-card"
               placeholder="CNH"
               keyboardType="number-pad"
-              value={cnh}
-              onChangeText={setCnh}
+              value={driverLicense}
+              onChangeText={setDriverLicense}
             />
           </Form>
 
