@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import * as Yup from 'yup';
 import { useTheme } from "styled-components";
 import { useNavigation } from "@react-navigation/native";
 import { 
@@ -6,6 +7,7 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
+  Alert,
 } from "react-native";
 
 import { Button } from "../../components/Button";
@@ -17,6 +19,34 @@ import { Container, Header, Title, SubTitle, Form, Footer } from "./styles";
 export function Signin() {
   const { colors } = useTheme();
   const { navigate } = useNavigation();
+
+  const [ email, setEmail ] = useState('');
+  const [ password, setPassword ] = useState('');
+
+  async function handleSignIn() {
+    try{
+      const shema = Yup.object().shape({
+        email: Yup.string()
+          .required('E-mail obrigatório')
+          .email('Digite um e-mail válido'),
+        password: Yup.string()
+          .required('A senha é obrigatória')
+      });
+
+      await shema.validate({ email, password });
+
+      Alert.alert('Tudo certo')
+    }catch(error){
+      if(error instanceof Yup.ValidationError) {
+        Alert.alert('Opa', error.message)
+      } else {
+        Alert.alert(
+          'Erro na autenticação', 
+          'Ocorreu um erro ao fazer login, verifique as credenciais'
+        )
+      }
+    }
+  }
 
   return (
     <KeyboardAvoidingView behavior="position" enabled>
@@ -43,18 +73,22 @@ export function Signin() {
               keyboardType="email-address"
               autoCorrect={false}
               autoCapitalize="none"
+              value={email}
+              onChangeText={setEmail}
             />
 
             <InputPassword 
               iconName="lock" 
-              placeholder="Senha" 
+              placeholder="Senha"
+              value={password}
+              onChangeText={setPassword}
             />
           </Form>
 
           <Footer>
             <Button
               title="login"
-              onPress={() => {}}
+              onPress={handleSignIn}
               disabledOpacity={false}
               loading={false}
             />
