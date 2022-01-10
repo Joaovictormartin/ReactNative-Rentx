@@ -10,6 +10,7 @@ interface Props {
 
 export const Container = styled.View`
   flex-direction: row;
+  margin-bottom: 8px;
 `;
 
 export const IconContainer = styled.View`
@@ -53,5 +54,7 @@ export const RowFocused = styled.View`
   width: 100%;
   height: 2px;
   background-color: ${({ theme }) => theme.colors.main};
+
+  margin: -8px 0 8px 0;
 `;
 
