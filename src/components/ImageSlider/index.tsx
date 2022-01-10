@@ -1,10 +1,11 @@
 import React, { useState, useRef } from "react";
 import { FlatList, ViewToken } from "react-native";
 
+import { Bullet } from "../Bullet";
+
 import {
   Container,
   ImageIndexes,
-  ImageIndex,
   CarImageWrapper,
   CarImage,
 } from "./styles";
@@ -29,7 +30,7 @@ export function ImageSlider({ imageUrl }: Props) {
   //função para renderizar o component de indicação da imagem
   function ListImage() {
     return imageUrl.map((_, index) => (
-      <ImageIndex key={index} active={index === imageIndex} />
+      <Bullet key={index} active={index === imageIndex} />
     ));
   }
 
