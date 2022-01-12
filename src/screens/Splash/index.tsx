@@ -61,7 +61,7 @@ export function Splash() {
   }, []);
 
   function startApp() {
-    navigate("Home")
+    navigate("Signin")
   }
 
   return (
