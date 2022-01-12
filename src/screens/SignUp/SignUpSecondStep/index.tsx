@@ -10,6 +10,8 @@ import {
   Alert,
 } from "react-native";
 
+import { api } from "../../../services/api";
+
 import { Bullet } from "../../../components/Bullet";
 import { Button } from "../../../components/Button";
 import { BackButton } from "../../../components/BackButton";
@@ -57,14 +59,26 @@ export function SignUpSecondStep() {
           .required("Confirmar senha é obrigatório."),
       });
 
-      await shema.validate({ password, passwordConfirm });
+      //await shema.validate({ password, passwordConfirm });
 
-      navigate('Confirmation', {
-        title: 'Conta Criada!', 
-        message: `Agora é só fazer login\ne aproveitar.`, 
-        nextScreenRoute: 'Signin'
-      });
+      const data = { 
+        password,
+        name: user.name,
+        email: user.email,
+        driver_license: user.driverLicense
+      }
 
+      await api.post('/users', data)
+        .then(() => {
+          navigate('Confirmation', {
+            title: 'Conta Criada!', 
+            message: `Agora é só fazer login\ne aproveitar.`, 
+            nextScreenRoute: 'Signin'
+          });
+        })
+        .catch(() => {
+          Alert.alert('Aviso', 'Não foi possível cadastrar')
+        })
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         Alert.alert("Opa", error.message);
