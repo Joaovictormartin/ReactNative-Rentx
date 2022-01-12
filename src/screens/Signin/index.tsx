@@ -10,6 +10,8 @@ import {
   Alert,
 } from "react-native";
 
+import { useAuth } from "../../hooks/useAuth";
+
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 import { InputPassword } from "../../components/InputPassword";
@@ -17,6 +19,7 @@ import { InputPassword } from "../../components/InputPassword";
 import { Container, Header, Title, SubTitle, Form, Footer } from "./styles";
 
 export function Signin() {
+  const { signIn } = useAuth();
   const { colors } = useTheme();
   const { navigate } = useNavigation();
 
@@ -39,7 +42,8 @@ export function Signin() {
 
       await shema.validate({ email, password });
 
-      Alert.alert("Tudo certo");
+      await signIn({ email, password });
+
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         Alert.alert("Opa", error.message);
