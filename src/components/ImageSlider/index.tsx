@@ -11,7 +11,10 @@ import {
 } from "./styles";
 
 interface Props {
-  imageUrl: string[];
+  imageUrl: {
+    id: string;
+    photos: string;
+  }[];
 }
 
 interface ChangeImageProps {
@@ -29,8 +32,8 @@ export function ImageSlider({ imageUrl }: Props) {
 
   //função para renderizar o component de indicação da imagem
   function ListImage() {
-    return imageUrl.map((_, index) => (
-      <Bullet key={index} active={index === imageIndex} />
+    return imageUrl.map((item, index) => (
+      <Bullet key={item.id} active={index === imageIndex} />
     ));
   }
 
@@ -38,7 +41,7 @@ export function ImageSlider({ imageUrl }: Props) {
   function renderItem({ item }: any) {
     return (
       <CarImageWrapper>
-        <CarImage source={{ uri: item }} resizeMode="cover" />
+        <CarImage source={{ uri: item.photo }} resizeMode="cover" />
       </CarImageWrapper>
     );
   }
@@ -51,7 +54,7 @@ export function ImageSlider({ imageUrl }: Props) {
         data={imageUrl}
         horizontal
         showsHorizontalScrollIndicator={false}
-        keyExtractor={(key) => key}
+        keyExtractor={(item) => item.id}
         renderItem={renderItem}
         onViewableItemsChanged={indexChanged.current}
       />

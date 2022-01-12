@@ -62,7 +62,7 @@ export function ShedulingDetails() {
   const { navigate, goBack } = useNavigation();
   const { car, dates } = route.params as Params;
 
-  const rentalTotal = Number(dates.length) * car.rent.price;
+  const rentalTotal = Number(dates.length) * car.price;
 
   async function handleShedulingComplete() {
     setLoading(true);
@@ -121,8 +121,8 @@ export function ShedulingDetails() {
           </Description>
 
           <Rent>
-            <Period>{car?.rent?.period}</Period>
-            <Price>R$ {car?.rent?.price}</Price>
+            <Period>{car?.period}</Period>
+            <Price>R$ {car?.price}</Price>
           </Rent>
         </Details>
 
@@ -159,7 +159,7 @@ export function ShedulingDetails() {
         <RentalPrice>
           <RentalPriceDetails>
             <RentalPriceLabel>Total</RentalPriceLabel>
-            <RentalPriceQuota>{`R$ ${car.rent.price} x${dates.length} diárias`}</RentalPriceQuota>
+            <RentalPriceQuota>{`R$ ${car.price} x${dates.length} diárias`}</RentalPriceQuota>
           </RentalPriceDetails>
           <RentalPriceTotal>R$ {rentalTotal}</RentalPriceTotal>
         </RentalPrice>
